@@ -164,7 +164,9 @@
       "codifyacademy" : true
     },
     "PeadES2Ij7RgWQTJD7ZpRRFCjlB3" : {
-      "main" : true
+      "main" : true,
+      "cybridindustries":true,
+      "codifyacademy":true
     }
   }
 }
