@@ -1,0 +1,259 @@
+<!-- content for group details page -->
+<md-dialog class="fullscreen-dialog">
+
+  <!-- start: Group View - push card down as high as navbar -->
+  <div ng-cloak id="groupView" layout="column">
+
+    <!-- start: Group Header -->
+    <md-card layout="row" layout-align="space-between center" id="groupHeader" class="md-padding" md-whiteframe="3">
+        <h2 id="groupName" class="group-name">{{group}}</h2>
+        <div class="action-items" id="groupCancel">
+          <md-button  class="md-icon-button icon icon-cross"
+                      ng-click="cancel()"
+                      aria-label="Close dialog">
+          </md-button>
+        </div>
+    </md-card>
+    <!-- end: Group Header -->
+
+    <!-- start: Group Content -->
+  	<md-card layout="row" id="groupContent" md-whiteframe="2">
+
+      <!-- start: group details LEFT -->
+      <div layout="column" flex="33" id="groupLeft" md-whiteframe="2">
+          <!-- start: add a new classifier -->
+          <section layout="row" id="addNewClassifier" class="md-padding">
+              <div layout="row">
+                <md-input-container class="group-input-container">
+                  <label class="classifier-label">New Classifier</label>
+                  <input  ng-model="group"
+                          ng-disabled ="group"
+                          class="group-name">
+                </md-input-container>
+                <md-input-container class="group-input-container">
+                  <input  ng-model="newClassifierInput"
+                          aria-label="enter new classifier name"
+                          ng-focus="clear()"
+                          ng-change="createClassifierName()"
+                          id="newClassifierName">
+                </md-input-container>
+              </div>
+              <div class="action-items">
+                <md-button  ng-click="addClassifier($event)"
+                            class="md-icon-button icon icon-plus vertically-align"
+                            aria-label="add classifier">
+                </md-button>
+              </div>
+          </section>
+          <!-- end: add a new classifier -->
+
+          <!-- start: list of classifiers -->
+          <md-subheader class="md-primary" >Classifiers</md-subheader>
+          <section class="list-section">
+            <md-list class="item-list">
+              <md-virtual-repeat-container class="item-list-vertical-container">
+                <div  ng-repeat="classifier in classifiers"
+                      ng-if="classifier.group == group"
+                      class="repeated-item" flex>
+                  <md-list-item>
+                    <md-button ng-click="showClassifierDetails($index)" ng-class="{'selected' : classifier === selectedObj }" class="item-button">
+                      <div class="info-box">
+                        <div class="row-one">
+                          <span>{{classifier.$id}}</span>
+                        </div>
+                        <div class="row-two">
+                        </div>
+                      </div>
+                    </md-button>
+                  </md-list-item>
+                </div>
+              </md-virtual-repeat-container>
+            </md-list>
+          </section>
+          <!-- end: list of classifiers -->
+
+        </div>
+        <!-- end: group details LEFT -->
+
+        <!-- start: group details RIGHT -->
+        <div layout="column" flex="66" id="groupRight">
+
+            <!-- start: classifier content header -->
+    	   		<md-content layout="column" id="classifierHeader">
+
+                <!-- start: classifier name -->
+            		<section layout="row">
+
+                  <!-- start: input & action item -->
+                    <!-- start: input -->
+                    <div layout="row" class="wrapper">
+                      <md-input-container class="group-input-container" >
+                        <label class="classifier-label">
+                          <span class="group-input-label">Classifier <b>{{editClassifier}}</b></span>
+                        </label>
+                        <input  ng-model="group"
+                                ng-disabled ="group"
+                                class="group-name">
+                      </md-input-container>
+                      <md-input-container md-no-float class=" wrapper group-input-container">
+                        <label>
+                          <span   id="statusClassifier"
+                                  class="group-input-status">{{statusClassifier}}
+                                  <span id="undoClassifier"></span>
+                          </span>
+                        </label>
+                        <input  ng-model="inputClassifier"
+                                aria-label="save updated classifier to database"
+                                ng-change="updateEdit('classifier')"
+                                ng-disabled="!selectedObj"
+                                ng-focus="clear()"
+                                placeholder="select classifier on the left!"
+                                id="inputClassifier">
+                      </md-input-container>
+                    </div>
+                    <!-- end: input -->
+
+                    <div class="action-items">
+                      <!-- TODO: save all edits in one button next to cancel icon on top -->
+                      <!-- <md-button
+                              class="md-icon-button icon"
+                              ng-click="saveEdits('classifier', selectedObj, $event)"
+                              aria-label="save changes made to classifier"
+                              ng-disabled="buttonclicked"
+                              ng-class="{'icon-lock' : editClassifier === null, 'icon-unlocked' : editClassifier, 'hide' : !selectedObj }">
+                      </md-button> -->
+                      <md-button
+                              class="md-icon-button icon icon-bin vertically-align"
+                              ng-click="showConfirmDelete($event, 'classifier')"
+                              aria-label="delete object from firebase"
+                              ng-disabled="buttonclicked"
+                              ng-class="{'hide' : !selectedObj}">
+                      </md-button>
+
+                  <!-- end: input & status -->
+
+            		</section>
+                <!-- end: classifier name -->
+
+                <!-- start: answer -->
+                <section layout="column" id="answerWrapper">
+                   <md-input-container class="md-block group-input-container" flex-gt-xs ng-class="{'hide' : !selectedObj}">
+                     <label>
+                       <span class="group-input-label">Answer <b>{{editAnswer}}</b></span>
+                       <span  id="statusAnswer"
+                              class="group-input-status status-answer">
+                              {{statusAnswer}}
+                       </span>
+                     </label>
+                     <textarea  ng-model="selectedObj.answer"
+                                aria-label="save updated answer to the database"
+                                ng-change="updateEdit('answer')"
+                                ng-focus="clear()"
+                                rows ="3"
+                                md-select-on-focus
+                                md-maxlength="560"
+                                id="inputAnswer">
+                      </textarea>
+                   </md-input-container>
+
+                   <!-- <div class="action-items">
+                     <md-button
+                             class="md-icon-button icon vertically-align"
+                             ng-click="saveEdits('answer', selectedObj, $event)"
+                             ng-disabled="buttonclicked"
+                             aria-label="save changes made to classifier"
+                             ng-class="{'icon-lock' : editAnswer === null, 'icon-unlocked' : editAnswer, 'hide' : !selectedObj }">
+                     </md-button>
+                   </div> -->
+
+                </section>
+                <!-- end: answer -->
+    	   		</md-content>
+            <!-- end: classifier content Header -->
+
+            <!-- start: Questions List -->
+    	   		<md-content ng-class="{'hide' : !selectedObj}" layout="column" id="questionsView">
+
+              <!--  start: Question Header-->
+              <section layout="column" id="questionsSection">
+
+                <!-- start: add new question -->
+                <div layout="row" id="questionHeader">
+
+                    <md-input-container class="group-input-container" flex-gt-xs>
+                      <label>
+                          <span class="group-input-label">New Question <b>{{editQuestion}}</b></span>
+                          <span class="group-input-status status-question" id="statusQuestion">
+                                {{statusQuestion}}
+                                <span id="undoQuestion"></span>
+                          </span>
+                      </label>
+                      <input  ng-model="question"
+                              placeholder="Add a new question!"
+                              ng-focus="clear()"
+                              ng-change="clear()"
+                              id="newQuestion">
+                    </md-input-container>
+
+                    <div class="action-items">
+                      <md-button  ng-click="addQuestion()"
+                                  class="md-icon-button icon icon-plus vertically-align"
+                                  aria-label="add question">
+                      </md-button>
+                    </div>
+
+                </div>
+
+                <!-- end: add new question -->
+
+                <!-- <md-subheader class="md-primary" id="questionSubheader">Questions<b>{{editQuestion}}</b></md-subheader> -->
+              </section>
+              <!--  end: Question Header-->
+
+              <!-- start: list with existing questions -->
+
+              <section class="list-section">
+                <md-list class="item-list" id="questionsList">
+                  <md-virtual-repeat-container class="item-list-vertical-container">
+                    <div ng-repeat="questions in selectedObj.questionsArray track by $index" class="repeated-item">
+                      <md-list-item layout="row" class="question-wrapper">
+                            <md-input-container  class="md-block" flex-gt-xs >
+                              <input  ng-model="selectedObj.questionsArray[$index]"
+                                      aria-label="display question"
+                                      ng-change="updateEdit('question', $index)"
+                                      class="input-question">
+                            </md-input-container>
+
+                            <div class="action-items" >
+                              <md-button
+                                      class="md-icon-button icon icon-bin vertically-align"
+                                      ng-click="showConfirmDelete($event, 'question', $index)"
+                                      ng-disabled="buttonclicked"
+                                      aria-label="delete object from firebase">
+                              </md-button>
+                              <!-- <md-button
+                                      class="md-icon-button icon"
+                                      ng-click="saveEdits('question', selectedObj, $event)"
+                                      ng-disabled="buttonclicked"
+                                      aria-label="save changes made to question"
+                                      ng-class="{'icon-lock' : selectedQuestionIndex === null, 'icon-unlocked' : $index === selectedQuestionIndex, 'hide' : !selectedObj }">
+                              </md-button> -->
+                            </div>
+                      </md-list-item>
+                    </div>
+                  </md-virtual-repeat-container>
+                </md-list>
+              </section>
+              <!-- end: list with existing questions -->
+
+    	   		</md-content>
+            <!-- end: Question List -->
+
+        <!-- end: group details RIGHT -->
+        </div>
+
+  	</md-card>
+    <!-- end: Group Content-->
+
+  </div>
+</md-dialog>

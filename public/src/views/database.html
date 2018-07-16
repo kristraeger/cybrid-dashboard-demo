@@ -1,0 +1,46 @@
+<!-- content for group selection page -->
+<div layout="column" class="card-wrapper" ng-cloak>
+  <md-content class="md-padding noflex" layout="row" layout-wrap layout-xs="column">
+    <div flex-gt-xs="25" flex-xs="50" layout="column" ng-repeat="group in groups track by $index">
+      <md-card ng-click="showGroup($event, group)" class="card-button">
+        <md-card-title>
+            <span>{{group}}</span>
+        </md-card-title>
+        <!-- TODO: enable editing of group that has been clicked -->
+        <!-- <md-content layout="row" class="group-selection">
+            <md-input-container>
+              <input  ng-model="group"
+                      ng-disabled ="!editGroupMode"
+                      aria-label="input classifier group"
+                      class="input-classifier-group-name">
+            </md-input-container>
+            <div class="action-items">
+              <md-button ng-click="editGroup($event)"
+                  class="md-icon-button icon icon-pencil vertically-align edit-group-button"
+                  aria-label="edit classifier group">
+              </md-button>
+            </div>
+        </md-content> -->
+      </md-card>
+    </div>
+    <div flex-gt-xs="25" flex-xs="50" layout="column">
+      <md-card ng-click="createNewGroup()" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-content layout="row" id="createNewGroup" class="group-selection">
+            <md-input-container>
+              <label>New Classifier Group
+              </label>
+              <input  ng-model="newClassifierGroupName"
+                      placeholder="add a new group!"
+                      id="inputNewClassifierGroupName">
+            </md-input-container>
+            <div class="action-items">
+              <md-button ng-click="addNewGroupClassifier($event, newClassifierGroupName)"
+                  class="md-icon-button icon icon-plus vertically-align"
+                  aria-label="add new classifier group">
+              </md-button>
+            </div>
+        </md-content>
+      </md-card>
+    </div>
+  </md-content>
+</div>

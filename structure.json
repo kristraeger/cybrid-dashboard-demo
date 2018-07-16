@@ -1,0 +1,170 @@
+{
+  "admins" : {
+    "S4LMEUkKQJXo3dkR0O2xXYI2bMd2" : true,
+    "jY5ZnLDPE0QVuUC29shpb3Bz9Vn2" : true,
+    "bihi9OFcpwTThoK09Rds18qFBos1" : true,
+    "fFkf6iyCkXcapo4Wg7rIkpAVIXF3" : true,
+    "hKbmxei1PUPxvszvArNJzKcFMhd2" : true
+  },
+  "configs" : {
+    "cloudfoundry" : {
+      "friendlyName" : "Carl Jr.",
+      "classiferId" : "90e7acx197-nlc-2787",
+      "config_chat" : {
+        "apiKey" : "AIzaSyCOSrWFjq2BJPFn5NpVyEn5ulijrfvPW7o",
+        "authDomain" : "cloudfoundry-production.firebaseapp.com",
+        "databaseURL" : "https://cloudfoundry-production.firebaseio.com",
+        "messagingSenderId" : "843414829666",
+        "storageBucket" : "cloudfoundry-production.appspot.com"
+      },
+      "config_reply" : {
+        "apiKey" : "AIzaSyBy3xWg9EI7ZYwQrMLGaKEXvPCFufkPrMg",
+        "authDomain" : "cloudfoundry-reply.firebaseapp.com",
+        "databaseURL" : "https://cloudfoundry-reply.firebaseio.com",
+        "messagingSenderId" : "140893263943",
+        "storageBucket" : "cloudfoundry-reply.appspot.com"
+      },
+      "watson" : {
+        "password" : "cVkLPYJVaRMV",
+        "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
+        "username" : "a7c1ddcc-afae-416c-96d5-8902cd8d4fbc",
+        "version" : "v1"
+      }
+    },
+    "codifyacademy" : {
+      "friendlyName" : "Bob Bot",
+      "classiferId" : "90e7b4x199-nlc-15029",
+      "config_chat" : {
+        "apiKey" : "AIzaSyApLPiQtO3u2ZOFZe9dCnZ_GBUrVNB-Qs0",
+        "authDomain" : "bobbot-production.firebaseapp.com",
+        "databaseURL" : "https://bobbot-production.firebaseio.com",
+        "messagingSenderId" : "915825097189",
+        "storageBucket" : "bobbot-production.appspot.com"
+      },
+      "config_reply" : {
+        "apiKey" : "AIzaSyD2grFqQba-chmUdpbUXlj1bsHanSFR5xs",
+        "authDomain" : "bobbot-reply.firebaseapp.com",
+        "databaseURL" : "https://bobbot-reply.firebaseio.com",
+        "messagingSenderId" : "441214762842",
+        "storageBucket" : "bobbot-reply.appspot.com"
+      },
+      "watson" : {
+        "password" : "tikfMiu6eZqD",
+        "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
+        "username" : "e60831f8-3070-4cf0-b474-9f8fe0e45c94",
+        "version" : "v1"
+      }
+    },
+    "cybridindustries" : {
+      "friendlyName" : "Cedric",
+      "classiferId" : "90e7b4x199-nlc-2848",
+      "config_chat" : {
+        "apiKey" : "AIzaSyCtH_unyl3aoXTNHiKKRMHzjFEhKxlLERo",
+        "authDomain" : "cedric-chats.firebaseapp.com",
+        "databaseURL" : "https://cedric-chats.firebaseio.com",
+        "messagingSenderId" : "477393774024",
+        "storageBucket" : "cedric-chats.appspot.com"
+      },
+      "config_reply" : {
+        "apiKey" : "AIzaSyAMcJam6g19St10rJlHDfJtS8r9FVmyYWU",
+        "authDomain" : "cedric-reply.firebaseapp.com",
+        "databaseURL" : "https://cedric-reply.firebaseio.com",
+        "messagingSenderId" : "213513903123",
+        "storageBucket" : "cedric-reply.appspot.com"
+      },
+      "watson" : {
+        "password" : "TyFFU46cY7rz",
+        "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
+        "username" : "9ab4bddb-18f4-480b-b2d5-7866feeacc21",
+        "version" : "v1"
+      }
+    },
+    "main" : {
+      "friendlyName" : "Robocop",
+      "classiferId" : "f5bbbcx175-nlc-8114",
+      "config_chat" : {
+        "apiKey" : "AIzaSyCPtYgoDIaUelF0bu78CjKVkfbWXbcdmb0",
+        "authDomain" : "bobbot-test.firebaseapp.com",
+        "databaseURL" : "https://bobbot-test.firebaseio.com",
+        "messagingSenderId" : "156284800614",
+        "storageBucket" : "bobbot-test.appspot.com"
+      },
+      "config_reply" : {
+        "apiKey" : "AIzaSyANZLBQD8IYUj3Emns1nvNru8q3cl7IKt8",
+        "authDomain" : "bobbot-training.firebaseapp.com",
+        "databaseURL" : "https://bobbot-training.firebaseio.com",
+        "messagingSenderId" : "522479184142",
+        "storageBucket" : "bobbot-training.appspot.com"
+      },
+      "watson" : {
+        "password" : "AEG5M4fiGLhT",
+        "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
+        "username" : "a648e118-b1e1-4fa0-befa-f0ec3333d80e",
+        "version" : "v1"
+      }
+    },
+      "yc": {
+      "friendlyName" : "Sam Jr.",
+      "classiferId" : "90e7b4x199-nlc-5059",
+      "config_chat": {
+        "apiKey" : "AIzaSyC5ltydbD9pBqJmZC3ucr62oH1fsQgKhEc",
+        "authDomain": "yc-chats.firebaseapp.com",
+        "databaseURL": "https://yc-chats.firebaseio.com",
+        "storageBucket": "yc-chats.appspot.com",
+        "messagingSenderId": "888738379175"
+      },
+      "config_reply": {
+        "apiKey": "AIzaSyCtbbZld5uTwEFXtov6oLWxG84Pg5sLk4E",
+        "authDomain": "yc-reply.firebaseapp.com",
+        "databaseURL": "https://yc-reply.firebaseio.com",
+        "storageBucket": "yc-reply.appspot.com",
+        "messagingSenderId": "962402878465"
+      },
+      "watson" : {
+        "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
+        "username": "5ec0fcb8-6a3d-4cb4-9017-f73df5c8a82e",
+        "password": "bMfuebeMv7Uj",
+        "version": "v1"
+      }
+    },
+      "lenda": {
+      "friendlyName" : "Lenda Bot",
+      "classiferId" : "90e7b4x199-nlc-5059",
+      "config_chat": {
+        "apiKey" : "AIzaSyBSrRZClO3Fu9BkDt72bd9r14DhK9C1j7A",
+        "authDomain": "lenda-chats.firebaseapp.com",
+        "databaseURL": "https://lenda-chats.firebaseio.com",
+        "storageBucket": "lenda-chats.appspot.com",
+        "messagingSenderId": "626360194938"
+      },
+      "config_reply": {
+        "apiKey": "AIzaSyA1HJleC7m-MnlYmcr_1ngbutyrMQ_m1iQ",
+        "authDomain": "lenda-reply.firebaseapp.com",
+        "databaseURL": "https://lenda-reply.firebaseio.com",
+        "storageBucket": "lenda-reply.appspot.com",
+        "messagingSenderId": "1050931170600"
+      },
+      "watson" : {
+        "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
+        "username": "c2ececda-41c4-43bb-8088-a68b48ca64e8",
+        "password": "bMfuebeMv7Uj",
+        "version": "v1"
+      }
+    }
+  },
+  "owners" : {
+    "ZkEjnnCyukNUGymPrBsnVcwmPiI3" : {
+      "main" : true,
+      "codifyacademy": true
+    },
+    "lg9MA0bycCVhqDBS3Q6eM2s2bOH3": {
+      "codifyacademy" : true
+    },
+    "kKIyfKdj3WhEXYFnP3Gd91hjctm2": {
+      "codifyacademy" : true
+    },
+    "PeadES2Ij7RgWQTJD7ZpRRFCjlB3" : {
+      "main" : true
+    }
+  }
+}

@@ -1,0 +1,216 @@
+<!-- content for charts page -->
+
+<div layout="column" class="card-wrapper" ng-cloak>
+
+	<md-content class="md-padding noflex" layout-xs="column" layout="row">
+		<div flex-xs flex-gt-xs="50" layout="column">
+      <md-card style="height:108px" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+						<md-input-container style="margin:0;">
+							<span class="md-headline">
+								<input id="reportrange" name="daterange" type="text" aria-label="reportrange">
+							</span><br>
+	            <span class="md-subhead">
+								Date Range
+							</span>
+							<md-button style="float:right;" class="md-raised" onclick="exampleDownload()">Download CSV</md-button>
+						</md-input-container>
+          </md-card-title-text>
+        </md-card-title>
+      </md-card>
+    </div>
+  </md-content>
+
+	<md-content class="md-padding noflex" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card class="graphedData" data-id="totalConvosArrayCount" ng-click="check($event)" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline"><md-icon id="totalChatsIcon" md-font-icon="icon-stats-bars" class="icon"></md-icon><span class="statsIcon">{{totalConvos | number}}</span></span>
+            <span class="md-subhead statsSubHeading">Total Chats</span>
+          </md-card-title-text>
+        </md-card-title>
+      </md-card>
+    </div>
+		<div flex-xs flex-gt-xs="50" layout="column">
+      <md-card class="graphedData" data-id="talkedToBobArrayCount" ng-click="check($event)" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline"><md-icon id="talkedToBobIcon" md-font-icon="icon-stats-bars" class="icon"></md-icon><span class="statsIcon">{{talkedToBob | number}}</span></span>
+            <span class="md-subhead statsSubHeading">Opted in Chats</span>
+          </md-card-title-text>
+        </md-card-title>
+      </md-card>
+    </div>
+		<div flex-xs flex-gt-xs="50" layout="column">
+      <md-card class="graphedData" data-id="userQuestionsCount" ng-click="check($event)" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline"><md-icon id="userQuestionsIcon" md-font-icon="icon-stats-bars" class="icon"></md-icon><span class="statsIcon">{{userQuestions | number}}</span></span>
+            <span class="md-subhead statsSubHeading">Total User Questions</span>
+          </md-card-title-text>
+        </md-card-title>
+      </md-card>
+    </div>
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{avgMsgPerConvo}}</span>
+            <span class="md-subhead">Avg. messages per opted in chat</span>
+          </md-card-title-text>
+        </md-card-title>
+      </md-card>
+    </div>
+  </md-content>
+
+	<md-content class="md-padding noflex" layout-xs="column" layout="row">
+		<div flex-xs flex-gt-xs="50" layout="column">
+      <md-card class="graphedData" data-id="ctaSuccessArrayCount" ng-click="check($event)" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+						<span class="md-headline"><md-icon id="ctaSuccessIcon" md-font-icon="icon-stats-bars" class="icon"></md-icon><span class="statsIcon">{{ctaSuccess | number}}</span></span>
+            <span class="md-subhead statsSubHeading">Conversions</span>
+          </md-card-title-text>
+        </md-card-title>
+      </md-card>
+    </div>
+		<div flex-xs flex-gt-xs="50" layout="column">
+      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{convRate}}%</span>
+            <span class="md-subhead">Conversion Rate</span>
+          </md-card-title-text>
+        </md-card-title>
+      </md-card>
+    </div>
+		<div flex-xs flex-gt-xs="50" layout="column">
+      <md-card class="graphedData" data-id="webArrayCount" ng-click="check($event)" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline"><md-icon id="webChatsIcon" md-font-icon="icon-stats-bars" class="icon"></md-icon><span class="statsIcon">{{webTotalConvos | number}}</span></span>
+            <span class="md-subhead statsSubHeading">total Web Chats</span>
+          </md-card-title-text>
+        </md-card-title>
+      </md-card>
+    </div>
+		<div flex-xs flex-gt-xs="50" layout="column">
+      <md-card class="graphedData" data-id="textArrayCount" ng-click="check($event)" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline"><md-icon id="textChatsIcon" md-font-icon="icon-stats-bars" class="icon"></md-icon><span class="statsIcon">{{textTotalConvos | number}}</span></span>
+            <span class="md-subhead statsSubHeading">Total Text Chats</span>
+          </md-card-title-text>
+        </md-card-title>
+      </md-card>
+    </div>
+  </md-content>
+
+	<md-content class="md-padding noflex" layout-xs="column" layout="row">
+		<div flex-xs flex-gt-xs="100" layout="column">
+			<md-card layout="column" layout-align="center" class="chart-card" >
+				<h3 style="text-align:center">Classifiers</h3>
+					<!-- <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="classifier in classifierArray">
+						<p class="md-subhead"> {{ classifier.name }} </p>
+						<p class="md-subhead"> {{ classifier.count }} </p>
+						<p class="md-subhead">{{ ((classifier.count / userQuestions) * 100) | number : 2 }}%</p>
+				  </md-list-item> -->
+					<!-- <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
+          <div class="md-toolbar-tools">
+            <span>Nutrition</span>
+            <div flex></div>
+            <md-button class="md-icon-button" ng-click="loadStuff()">
+              <md-icon>refresh</md-icon>
+            </md-button>
+          </div>
+        </md-toolbar> -->
+
+        <md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && selected.length">
+          <div class="md-toolbar-tools">
+            <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+          </div>
+        </md-toolbar>
+
+        <md-table-container>
+          <table md-table multiple="{{options.multiSelect}}">
+            <thead ng-if="!options.decapitate" md-head>
+              <tr md-row>
+                <th md-column><span>Classifiers</span></th>
+                <th md-column><span>Total Count</span></th>
+                <th md-column md-numeric><span>% of all messages</span></th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row md-auto-select="options.autoSelect" ng-repeat="classifier in classifierArray | filter: filter.search | limitTo: query.limit : (query.page -1) * query.limit">
+                <td md-cell>{{classifier.name }}</td>
+                <td md-cell>{{classifier.count}}</td>
+                <td md-cell>{{ ((classifier.count / (userQuestions - noReply)) * 100) | number : 2 }}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{classifierCount}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
+			</md-card>
+		</div>
+		<div flex-xs flex-gt-xs="100" layout="column">
+			<md-card layout="column" layout-align="space-around center" class="chart-card" >
+				<h3>Graphed Data</h3>
+				<div class="charts-wrapper" layout="row" layout-align="space-around center">
+					<canvas id="line" class="chart chart-line" chart-colors="colours" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick" height="750px" width="1500px">
+					</canvas>
+				</div>
+			</md-card>
+		</div>
+	</md-card>
+
+	<!-- <md-card layout="column" layout-align="space-around center"  class="chart-card" >
+
+		<h3>Text Replies Received</h3>
+
+		<div class="charts-wrapper" layout="row" layout-align="space-around center">
+
+			<md-content id="hours-chart" class="chart-container">
+
+				<canvas id="hours-bar" class="chart chart-bar" chart-data="replyHourly"
+				chart-labels="hours" chart-series="reply" chart-options="replyHourlyOptions" chart-dataset-override="datasetOverride2"</canvas>
+
+			</md-content>
+
+			<md-content id="reply-chart" class="chart-container">
+
+				<canvas id="reply-pie" class="chart chart-pie" chart-data="replyTotal" chart-labels="direction"</canvas>
+
+			</md-content>
+
+		</div>
+
+	</md-card>
+
+	<md-card layout="column" layout-align="space-around center" class="chart-card" >
+
+		<h3>Questions Asked By User</h3>
+
+		<div class="charts-wrapper" layout="row" layout-align="space-around center">
+
+			<md-content id="classifier-chart" class="chart-container">
+
+				<canvas id="classifier-doughnut" class="chart chart-doughnut" chart-data="topClassifiers" chart-labels="classifiers" chart-options="classifierOptions"</canvas>
+
+			</md-content>
+
+			<md-content id="questions-chart" class="chart-container">
+
+				<canvas id="questions-bar" class="chart-horizontal-bar" chart-data="questionsTotal"
+				chart-labels="labelsMonth" chart-series="type" chart-options="questionsTotalOptions" </canvas>
+
+			</md-content>
+
+
+
+		</div>
+
+	</md-card> -->
+
+</div>

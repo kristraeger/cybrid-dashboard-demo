@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "configs": {
+      ".read": "root.child('admins').hasChildren([auth.uid])",
+      ".write": false,
+      "$conf" : {
+        ".read" : "root.child('owners').child(auth.uid).hasChildren([$conf])",
+        ".write" : false
+      }
+    },
+
+    "admins" : {
+      ".write" : false,
+      ".read" : true
+
+    },
+    "owners" : {
+      ".write" : false,
+      ".read" : true
+
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<md-card layout="column" layout-align="center center" class="md-padding" id="trainBot">
+
+  <div>
+  		<div layout="column" layout-align="center" class="md-padding">
+          <div class="md-subhead">Download questions and classifiers as csv:</div>
+          <md-button class="md-raised" onclick="downloadTrainingData()">Download CSV</md-button>
+      </div>
+
+      <div layout="column" layout-align="center " class="md-padding">
+        <div class="md-subhead">Watson credentials used for training:</div>
+
+        <md-content class="md-padding" layout="column">
+
+          <md-input-container>
+            <label>username</label>
+            <input value="{{watson.username}}">
+          </md-input-container>
+
+          <md-input-container>
+            <label>password</label>
+            <input value="{{watson.password}}">
+          </md-input-container>
+
+          <md-input-container>
+            <label>current classifierId</label>
+            <input value="{{current_classifierID}}">
+          </md-input-container>
+
+        </md-content>
+
+      </div>
+  </div>
+
+</md-card>

@@ -1,0 +1,37 @@
+<md-dialog aria-label="Add Question To Database" id="AddQuestionModal">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Add Question To Database</h2>
+        <span flex></span>
+        <md-button class="md-icon-button icon icon-cross" ng-click="cancel()" aria-label="Close dialog">
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content layout="column" layout-align="center center">
+      <md-input-container flex="100" id="trainingQuestion">
+        <label>Question</label>
+        <input ng-model="question">
+      </md-input-container>
+      <md-input-container flex="100" id="selectedClassifier">
+        <label>Classifier</label>
+        <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+          <md-select-header class="select-header" ng-model="searchTerm">
+          </md-select-header>
+          <md-option  ng-value="item.$id"
+                      ng-repeat="(index,item) in items | filter: {$id: searchTerm}"
+                      ng-selected="index == selectedIndex"
+                      class="select-option"
+                      >{{item.$id}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button ng-click="addQuestion(question, selectedItem)" id="addQuestionBtn">
+        Add
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

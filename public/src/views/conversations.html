@@ -1,0 +1,139 @@
+<!-- content for conversations page -->
+
+<div layout="column" class="conversations" ng-cloak>
+
+	<md-card layout="row" layout-align="space-around center" class="search-panel">
+
+		<md-input-container class="md-block search-input" flex="40">
+			<md-icon md-font-icon="icon-search" class="icon"></md-icon>
+			<label>Search ({{dynamicItems.numItems}})</label>
+			<input type="text" ng-model="queryTerm" ng-model-options="{updateOn: 'default blur', debounce: {default: 500, blur: 0} }" ng-change="search(searchObj, queryTerm)">
+			<div class="hint">search for type, location, phone number, classifier...</div>
+    </md-input-container>
+
+		 <md-input-container class="date-filters md-block md-icon-left">
+		 	<md-icon md-font-icon="icon-calendar" class="icon"></md-icon>
+		        <label>Time Period </label>
+		        <md-select md-container-class="select-menu" ng-model="selectedDate" ng-model-options="{trackBy: '$value.id'}" ng-change="dateSelected(selectedDate)">
+			        <md-option ng-value="date" ng-repeat="date in dates">
+			        	{{date.name}}
+			        </md-option>
+		        </md-select>
+		        <div class="hint">until {{ (selectedDate.name !== "Today" ? selectedDate.end : 'end of day') | convertUnixDay }} </div>
+		  </md-input-container>
+
+      <div class="search-filters" layout="row space-between">
+				<div layout="column" class="filter-wrapper">
+					<md-button class="md-icon-button icon icon-loop" aria-label="replied" name="showReplied" ng-class="{ 'filter-accent' : showReplied }" ng-click="filterData($event, showReplied)">
+					</md-button>
+					<div class="hint" ng-class="{ 'filter-accent' : showReplied }">replied</div>
+				</div>
+				<div layout="column" class="filter-wrapper">
+					<md-button class="md-icon-button icon icon-paste" aria-label="untrained" name="showUntrained" ng-class="{ 'filter-accent' : showUntrained}" ng-click="filterData($event, showUntrained)">
+					</md-button>
+					<div class="hint" ng-class="{ 'filter-accent' : showUntrained }">untrained</div>
+				</div>
+				<div layout="column" class="filter-wrapper">
+					<md-button class="md-icon-button icon icon-trophy" aria-label="excellent" name="showExcellent" ng-class="{ 'filter-accent' : showExcellent }" ng-click="filterData($event, showExcellent)">
+					</md-button>
+					<div class="hint" ng-class="{ 'filter-accent' : showExcellent }">excellent</div>
+				</div>
+      </div>
+
+	</md-card>
+
+	<md-card layout="row" class="conversations-view">
+
+		<!-- list of conversations -->
+		<md-list flex="33" class="item-list">
+
+			<md-virtual-repeat-container class="item-list-vertical-container">
+	      		<div md-virtual-repeat="item in dynamicItems " md-on-demand
+	          		class="repeated-item" flex>
+	          		<md-list-item>
+		        			<md-button ng-click="showContent($index)" ng-class="{'selected' : item === selectedObj }" class="item-button">
+		        				<div class="info-box">
+		        					<div class="row-one">
+			        					<span class="type">{{item.info.type}}</span>
+			        					<span class="direction">{{item.info.direction}}</span>
+			        					<span class="date">{{item.info.createdAt | convertUnixDay}}</span>
+			        				</div>
+
+			        				<div class="row-two">
+			        					<div class="location">
+			        						<md-icon md-font-icon="icon-location" class="icon"></md-icon>
+			        						{{item.info.customerCountry}} {{item.info.customerState | customerState}} {{item.info.customerCity || "no further infos available"}}
+			        					</div>
+			        				</div>
+		        				</div>
+		        			</md-button>
+	        		</md-list-item>
+	      		</div>
+		    </md-virtual-repeat-container>
+
+    	</md-list>
+
+    	<!-- view content -->
+	   	<md-content class="message-content-view" flex="66">
+	   		<md-subheader class="md-primary conversation-bar md-no-sticky">
+
+	   			<div class="content-wrapper" layout="row" >
+
+	        		<div class="information-items" flex="70">
+		        		<div class="conversation-id">id: {{selectedObj.$id}}</div>
+		        		<div class="created-date"> created:
+		        			{{selectedObj.info.createdAt | convertUnix}}
+		        		</div>
+		        		<div class="last-reply" >last replied:
+		        			<span class="chips"> {{selectedObj.info.lastReplyUTC || "no reply" | convertUnixHour}} <span>
+		        		</div>
+		        		<div class="trained-btn-text"> trained:
+		        			<span class="chips"> {{selectedObj.info.trained}} </span>
+		        		</div>
+	        		</div>
+
+							<div class="action-items" flex="30" >
+								<md-button 	class="md-icon-button icon icon-trophy"
+														aria-label="trophy"
+														ng-class="{ 'filter-accent' : selectedObj.info.excellent }"
+														ng-click="setExcellentFlag(selectedObj.$id)">
+								</md-button>
+			   				<md-button 	class="md-icon-button icon icon-paste"
+														aria-label="trained"
+														ng-class="{ 'filter-accent' : selectedObj.info.trained, 'icon-clipboard': selectedObj.info.trained}"
+														ng-click="setTrainedFlag(selectedObj.$id)">
+		        		</md-button>
+        			</div>
+
+	        </div>
+
+	   		</md-subheader>
+
+	   		<md-content name="message">
+	   			<div ng-repeat="message in selectedObj.messages track by $index">
+	   				<div>
+	   					<blockquote class="chat">
+	   						<p class="question">{{message.message}}
+									<span class="onclick-training" name="onclick-training" ng-class="{ 'hide': message.confidence > 0.99 || message.trained}">
+										<button class="md-button icon icon-plus onclick-training-btn" aria-label="onclick training" ng-click="onClickTraining($event, message, $index, selectedObj.$id)" ng-class="{ 'icon-paste' : trained }"></button>
+									</span>
+								</p>
+	   					</blockquote>
+
+	   					<div class="message-info">
+	   						<span>classifier:</span> {{message.classifier}}
+	   						<span>confidence:</span> {{message.confidence | number : 2}}
+	   					</div>
+
+	   					<blockquote class="chat">
+	   						<p class="reply">{{message.reply}}</p>
+	   					</blockquote>
+	   				</div>
+	   			</div>
+	   		</md-content>
+
+		</md-content>
+
+	</md-card>
+
+</div>

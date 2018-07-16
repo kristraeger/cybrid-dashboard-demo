@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+  <head>
+
+    <title>Cybrid Industries | Login </title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<!-- ======= Style Sheets ====== -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic">
+    	<!--[if lt IE 8]><!-->
+    <link rel="stylesheet" href="/assets/icons/ie7/ie7.css">
+    	<!--<![endif]-->
+    <!-- bootstrap Note: has been binded directly to Controller -->
+    <!-- <link rel="stylesheet" href="http://cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css">
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.min.css"/>
+    <link rel="stylesheet" href="http://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.css">
+    <link type="text/css" rel="stylesheet" href="./assets/firebase-ui-auth.css">
+    <link rel="stylesheet" href="./assets/app.css"/>
+
+    <!--favicon -->
+    <link rel="shortcut icon" href="./assets/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="./assets/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="./assets/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="./assets/favicons/manifest.json">
+    <link rel="mask-icon" href="./assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+
+	   <!-- ====== Angular scripts ===== -->
+	   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+	  <!-- Angular Charts -->
+	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+	  <script type="text/javascript" src="https://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
+		<!-- Angular Material -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-animate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-aria.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <!-- AngularFire -->
+	  <script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
+	  <!-- Angular Route -->
+	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+    <!-- Angular CSS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.js"></script>
+
+    <!-- md-data-table link and script -->
+    <script src="http://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.js"></script>
+	  <!-- firebase -->
+  	<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <script type="text/javascript" src="./src/firebase-ui-auth.js"></script>
+
+    <style type="text/css">
+        /**
+         * Hide when Angular is not yet loaded and initialized
+         */
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+          display: none !important;
+        }
+    </style>
+
+  </head>
+
+  <body ng-app="dashApp" ng-controller="LoginCtrl" ng-cloak>
+
+			<!-- ==== start NAVBAR ==== -->
+			<md-toolbar layout="row" class="md-whiteframe-4dp navbar">
+				<span class="navbar-brand"><img src="/assets/light-logo.png"></span>
+				<button id="btnLogout" class="md-button hide">
+					log out
+				</button>
+			</md-toolbar>
+			<!-- ==== end NAVABAR ==== -->
+
+      <!-- start SHOW WHEN SIGNED OUT -->
+      <div id="user-signed-out" layout="row" layout-align="center center">
+
+          <md-content class="md-padding" flex="60" flex-offset="20">
+              <md-card layout="column" layout-align="center center md-padding">
+
+                  <md-input-container class="login-input" id="emailContainer">
+                      <!-- <md-icon md-font-icon="icon-search" class="icon"></md-icon> -->
+                      <label>Email</label>
+                      <input id="txtEmail" type="text" ng-model="email">
+                  </md-input-container>
+
+                  <md-input-container class="login-input" id="passContainer">
+                      <label>Password</label>
+                      <input id="txtPassword" type="password" ng-model="pass">
+                  </md-input-container>
+
+                  <md-input-container id="loginBtnContainer">
+                      <button id="btnLogin" class="md-raised md-primary md-button md-ink-ripple">
+                          <span>log in</span>
+                      </button>
+                  </md-input-container>
+
+              </md-card>
+          </md-content>
+      </div>
+      <!-- end SHOW WHEN SIGNED OUT -->
+
+      <!-- start SELECT BOT-->
+      <md-card ng-show="botsToSelect.length > 0" layout="column" layout-align="center center" class="md-padding" id="select-bot" flex="100" flex-gt-md="80" flex-offset-gt-md="10">
+          <div layout="column" layout-align="center " class="md-padding">
+            <div class="md-headline md-padding">Select a bot</div>
+            <div class="noflex" layout="row" layout-wrap layout-xs="column">
+              <div flex-gt-xs="20" flex-xs="50" layout="column" ng-repeat="bot in botsToSelect">
+                <md-card class="card-button" ng-click="selectBot(bot)">
+                  <md-card-title layout ="column">
+                    <span ng-bind ="bot.friendlyName"></span>
+                    <span ng-bind ="bot.compName" class="company-name"></span>
+                  </md-card-title>
+                </md-card>
+              <div>
+            </div>
+          <div>
+      </md-card>
+
+      <!-- end SELECT BOT-->
+
+	<!-- modules, app.config -->
+	<script src="app.js"></script>
+
+	<!--controllers  -->
+	<script src="./src/controllers/LoginCtrl.js"></script>
+  <script src="./src/controllers/MenuCtrl.js"></script>
+
+  </body>
+
+</html>
