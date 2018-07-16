@@ -1,8 +1,8 @@
 angular.module('dashApp').controller('LoginCtrl', function ($rootScope, $scope, $mdDialog, $location, $firebaseArray) {
     console.log('LoginCtrl');
 
-    // $scope.email = 'demo@cybridindustries.com';
-    // $scope.pass = 'ilovecybrids';
+    $scope.email = 'demo@cybridindustries.com';
+    $scope.pass = 'ilovecybrids';
     $scope.botsToSelect = []; //List of available bots
     $scope.userLoggedIn = false; //isUser logged in?
     $scope.botSelected = null // has bot been selected yet?
@@ -109,7 +109,7 @@ angular.module('dashApp').controller('LoginCtrl', function ($rootScope, $scope, 
     // login function
     $scope.login = function(){
         firebase.auth().signInWithEmailAndPassword($scope.email, $scope.pass).then(function (res) {
-            //okay. Lets check witch bots are avalible for us
+            //get available bots
             const uid = res.uid;
             // show log in view and set user var
             $rootScope.handleSignedInUser(res)
@@ -123,7 +123,7 @@ angular.module('dashApp').controller('LoginCtrl', function ($rootScope, $scope, 
                 console.log(availableBotsArray)
 
                 if (!isAdmin && !availableBotsArray.length) {
-                    throw new Exception('Access denided');
+                    throw new Exception('Access denied');
                 }
 
                 // display bots in DOM

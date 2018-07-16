@@ -1,14 +1,13 @@
 {
   "admins" : {
     "S4LMEUkKQJXo3dkR0O2xXYI2bMd2" : true,
-    "jY5ZnLDPE0QVuUC29shpb3Bz9Vn2" : true,
     "bihi9OFcpwTThoK09Rds18qFBos1" : true,
     "fFkf6iyCkXcapo4Wg7rIkpAVIXF3" : true,
-    "hKbmxei1PUPxvszvArNJzKcFMhd2" : true
+    "hKbmxei1PUPxvszvArNJzKcFMhd2" : true,
+    "jY5ZnLDPE0QVuUC29shpb3Bz9Vn2" : true
   },
   "configs" : {
     "cloudfoundry" : {
-      "friendlyName" : "Carl Jr.",
       "classiferId" : "90e7acx197-nlc-2787",
       "config_chat" : {
         "apiKey" : "AIzaSyCOSrWFjq2BJPFn5NpVyEn5ulijrfvPW7o",
@@ -24,6 +23,7 @@
         "messagingSenderId" : "140893263943",
         "storageBucket" : "cloudfoundry-reply.appspot.com"
       },
+      "friendlyName" : "Carl Jr.",
       "watson" : {
         "password" : "cVkLPYJVaRMV",
         "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
@@ -32,7 +32,6 @@
       }
     },
     "codifyacademy" : {
-      "friendlyName" : "Bob Bot",
       "classiferId" : "90e7b4x199-nlc-15029",
       "config_chat" : {
         "apiKey" : "AIzaSyApLPiQtO3u2ZOFZe9dCnZ_GBUrVNB-Qs0",
@@ -48,6 +47,7 @@
         "messagingSenderId" : "441214762842",
         "storageBucket" : "bobbot-reply.appspot.com"
       },
+      "friendlyName" : "Bob Bot",
       "watson" : {
         "password" : "tikfMiu6eZqD",
         "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
@@ -56,8 +56,7 @@
       }
     },
     "cybridindustries" : {
-      "friendlyName" : "Cedric",
-      "classiferId" : "90e7b4x199-nlc-2848",
+      "classiferId" : "90e7b4x199-nlc-15029",
       "config_chat" : {
         "apiKey" : "AIzaSyCtH_unyl3aoXTNHiKKRMHzjFEhKxlLERo",
         "authDomain" : "cedric-chats.firebaseapp.com",
@@ -72,6 +71,7 @@
         "messagingSenderId" : "213513903123",
         "storageBucket" : "cedric-reply.appspot.com"
       },
+      "friendlyName" : "Cedric",
       "watson" : {
         "password" : "TyFFU46cY7rz",
         "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
@@ -79,9 +79,93 @@
         "version" : "v1"
       }
     },
+    "fairy" : {
+      "classiferId" : "na",
+      "config_chat" : {
+        "apiKey" : "AIzaSyDga7Cwd7WKtHh43iajm8k2k7KZfY6fHQs",
+        "authDomain" : "fairy-chats.firebaseapp.com",
+        "databaseURL" : "https://fairy-chats.firebaseio.com",
+        "messagingSenderId" : "1036535022070",
+        "storageBucket" : "fairy-chats.appspot.com"
+      },
+      "config_reply" : {
+        "apiKey" : "AIzaSyAn-CEIk-BwmQ0F_h6qj6soNoJz3dOKuLU",
+        "authDomain" : "fairy-reply.firebaseapp.com",
+        "databaseURL" : "https://fairy-reply.firebaseio.com",
+        "messagingSenderId" : "1048232990801",
+        "storageBucket" : "fairy-reply.appspot.com"
+      },
+      "friendlyName" : "Fairy",
+      "watson" : {
+        "password" : "FzABbo02hevi",
+        "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
+        "username" : "1ea10773-6c53-4a67-8fde-869f2fdd043b",
+        "version" : "v1"
+      }
+    },
+    "ladderio" : {
+      "classiferId" : "90e7acx197-nlc-34682",
+      "config_chat" : {
+        "apiKey" : "AIzaSyAW3GyDXsJlvuR0UVGqtwaTkF1zF_eJKYg",
+        "authDomain" : "ladder-chats.firebaseapp.com",
+        "databaseURL" : "https://ladder-chats.firebaseio.com",
+        "messagingSenderId" : "983809790135",
+        "storageBucket" : "ladder-chats.appspot.com"
+      },
+      "config_reply" : {
+        "apiKey" : "AIzaSyCMPcWy8Vo3PAuiktwJZoqjhh6fmSg4sJE",
+        "authDomain" : "ladder-reply.firebaseapp.com",
+        "databaseURL" : "https://ladder-reply.firebaseio.com",
+        "messagingSenderId" : "887641210477",
+        "storageBucket" : "ladder-reply.appspot.com"
+      },
+      "friendlyName" : "Leo",
+      "watson" : {
+        "password" : "pAwOSeeAk2Be",
+        "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
+        "username" : "44756549-07b0-414a-8a5c-36ad3f70e1fc",
+        "version" : "v1"
+      }
+    },
+    "lenda" : {
+      "classiferId" : "n/a",
+      "config_chat" : {
+        "apiKey" : "AIzaSyBSrRZClO3Fu9BkDt72bd9r14DhK9C1j7A",
+        "authDomain" : "lenda-chats.firebaseapp.com",
+        "databaseURL" : "https://lenda-chats.firebaseio.com",
+        "messagingSenderId" : "626360194938",
+        "storageBucket" : "lenda-chats.appspot.com"
+      },
+      "config_reply" : {
+        "apiKey" : "AIzaSyA1HJleC7m-MnlYmcr_1ngbutyrMQ_m1iQ",
+        "authDomain" : "lenda-reply.firebaseapp.com",
+        "databaseURL" : "https://lenda-reply.firebaseio.com",
+        "messagingSenderId" : "1050931170600",
+        "storageBucket" : "lenda-reply.appspot.com"
+      },
+      "friendlyName" : "Lenda Bot",
+      "watson" : {
+        "password" : "Gdr5RqAOqO8d",
+        "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
+        "username" : "c2ececda-41c4-43bb-8088-a68b48ca64e8",
+        "version" : "v1"
+      }
+    },
     "main" : {
-      "friendlyName" : "Robocop",
       "classiferId" : "f5bbbcx175-nlc-8114",
+      "client" : {
+        "botName" : "Robocop",
+        "modal" : {
+          "avatar" : "http://cybridindustries.com/images/avatar_hello.png",
+          "bodyText" : "Want to have a quick chat about we can boost your sales?",
+          "bodyTitle" : "I\\'m Cedric,",
+          "delay" : 5,
+          "displayOnce" : true,
+          "enable" : true,
+          "header" : "Hi there!"
+        },
+        "userpic" : "http://codifyacademy.com/img/bob.png"
+      },
       "config_chat" : {
         "apiKey" : "AIzaSyCPtYgoDIaUelF0bu78CjKVkfbWXbcdmb0",
         "authDomain" : "bobbot-test.firebaseapp.com",
@@ -96,6 +180,7 @@
         "messagingSenderId" : "522479184142",
         "storageBucket" : "bobbot-training.appspot.com"
       },
+      "friendlyName" : "Robocop",
       "watson" : {
         "password" : "AEG5M4fiGLhT",
         "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
@@ -103,70 +188,119 @@
         "version" : "v1"
       }
     },
-      "yc": {
-      "friendlyName" : "Sam Jr.",
-      "classiferId" : "90e7b4x199-nlc-5059",
-      "config_chat": {
-        "apiKey" : "AIzaSyC5ltydbD9pBqJmZC3ucr62oH1fsQgKhEc",
-        "authDomain": "yc-chats.firebaseapp.com",
-        "databaseURL": "https://yc-chats.firebaseio.com",
-        "storageBucket": "yc-chats.appspot.com",
-        "messagingSenderId": "888738379175"
+    "makeschool" : {
+      "classiferId" : "90e7b4x199-nlc-48010",
+      "config_chat" : {
+        "apiKey" : "AIzaSyCStyxscNY8pQBLTuhp9RuE5Tpw0K8h4pM",
+        "authDomain" : "makeschool-chats.firebaseapp.com",
+        "databaseURL" : "https://makeschool-chats.firebaseio.com",
+        "messagingSenderId" : "241553893393",
+        "storageBucket" : "makeschool-chats.appspot.com"
       },
-      "config_reply": {
-        "apiKey": "AIzaSyCtbbZld5uTwEFXtov6oLWxG84Pg5sLk4E",
-        "authDomain": "yc-reply.firebaseapp.com",
-        "databaseURL": "https://yc-reply.firebaseio.com",
-        "storageBucket": "yc-reply.appspot.com",
-        "messagingSenderId": "962402878465"
+      "config_reply" : {
+        "apiKey" : "AIzaSyCyIKqY5Qh1oEXjn0h69DttHisIC1x_Rhw",
+        "authDomain" : "makeschool-reply.firebaseapp.com",
+        "databaseURL" : "https://makeschool-reply.firebaseio.com",
+        "messagingSenderId" : "374858280125",
+        "storageBucket" : "makeschool-reply.appspot.com"
       },
+      "friendlyName" : "Make School Bot",
       "watson" : {
-        "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
-        "username": "5ec0fcb8-6a3d-4cb4-9017-f73df5c8a82e",
-        "password": "bMfuebeMv7Uj",
-        "version": "v1"
+        "password" : "oq7D84g5tEWa",
+        "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
+        "username" : "2c475be1-1845-4918-a03a-562f1d154984",
+        "version" : "v1"
       }
     },
-      "lenda": {
-      "friendlyName" : "Lenda Bot",
-      "classiferId" : "90e7b4x199-nlc-5059",
-      "config_chat": {
-        "apiKey" : "AIzaSyBSrRZClO3Fu9BkDt72bd9r14DhK9C1j7A",
-        "authDomain": "lenda-chats.firebaseapp.com",
-        "databaseURL": "https://lenda-chats.firebaseio.com",
-        "storageBucket": "lenda-chats.appspot.com",
-        "messagingSenderId": "626360194938"
-      },
-      "config_reply": {
-        "apiKey": "AIzaSyA1HJleC7m-MnlYmcr_1ngbutyrMQ_m1iQ",
-        "authDomain": "lenda-reply.firebaseapp.com",
-        "databaseURL": "https://lenda-reply.firebaseio.com",
-        "storageBucket": "lenda-reply.appspot.com",
-        "messagingSenderId": "1050931170600"
-      },
+    "test1" : {
+      "createdAt" : 1492792800142,
       "watson" : {
-        "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
-        "username": "c2ececda-41c4-43bb-8088-a68b48ca64e8",
-        "password": "bMfuebeMv7Uj",
-        "version": "v1"
+        "password" : "gfghfh",
+        "url" : "hfhfgh",
+        "username" : "hfhf",
+        "version" : "hfhf"
+      }
+    },
+    "test2" : {
+      "createdAt" : 1492798248222
+    },
+    "test3" : {
+      "createdAt" : 1492803404903
+    },
+    "yc" : {
+      "classiferId" : "90e7b4x199-nlc-5059",
+      "config_chat" : {
+        "apiKey" : "AIzaSyC5ltydbD9pBqJmZC3ucr62oH1fsQgKhEc",
+        "authDomain" : "yc-chats.firebaseapp.com",
+        "databaseURL" : "https://yc-chats.firebaseio.com",
+        "messagingSenderId" : "888738379175",
+        "storageBucket" : "yc-chats.appspot.com"
+      },
+      "config_reply" : {
+        "apiKey" : "AIzaSyCtbbZld5uTwEFXtov6oLWxG84Pg5sLk4E",
+        "authDomain" : "yc-reply.firebaseapp.com",
+        "databaseURL" : "https://yc-reply.firebaseio.com",
+        "messagingSenderId" : "962402878465",
+        "storageBucket" : "yc-reply.appspot.com"
+      },
+      "friendlyName" : "Sam Jr.",
+      "watson" : {
+        "password" : "bMfuebeMv7Uj",
+        "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api",
+        "username" : "5ec0fcb8-6a3d-4cb4-9017-f73df5c8a82e",
+        "version" : "v1"
       }
     }
   },
   "owners" : {
-    "ZkEjnnCyukNUGymPrBsnVcwmPiI3" : {
-      "main" : true,
-      "codifyacademy": true
+    "4IVmO7kelDRO8N5YRyYJKJRT7s12" : {
+      "lenda" : true
     },
-    "lg9MA0bycCVhqDBS3Q6eM2s2bOH3": {
+    "6F8BZ0DlZ7WGRu5JTo9xJ5PDXtA3" : {
       "codifyacademy" : true
     },
-    "kKIyfKdj3WhEXYFnP3Gd91hjctm2": {
-      "codifyacademy" : true
+    "JH0WeiH8zIOXPe4Nc31bCm3TS0H3" : {
+      "ladderio" : true
     },
     "PeadES2Ij7RgWQTJD7ZpRRFCjlB3" : {
-      "main" : true,
+      "yc" : true,
       "cybridindustries":true,
-      "codifyacademy":true
+      "codifyacademy": true
+    },
+    "W7avFS9EeYdNGtv3nSIju12lUU33" : {
+      "makeschool" : true
+    },
+    "Zg20d1VFoQWr0rB9UGciHRAm4T92" : {
+      "codifyacademy" : true
+    },
+    "ZkEjnnCyukNUGymPrBsnVcwmPiI3" : {
+      "codifyacademy" : true,
+      "main" : true
+    },
+    "c03rWZcRfpMAr3riEu5y3IoHVbR2" : {
+      "codifyacademy" : true
+    },
+    "kKIyfKdj3WhEXYFnP3Gd91hjctm2" : {
+      "codifyacademy" : true
+    },
+    "lg9MA0bycCVhqDBS3Q6eM2s2bOH3" : {
+      "codifyacademy" : true
+    },
+    "oVWC0QS9eBc4rqGbR3uZkoTUUls1" : {
+      "codifyacademy" : true
+    },
+    "srN1NqNC6LQwDM7nGd6DT0TkCAm1" : {
+      "codifyacademy" : true
+    },
+    "sv1V0CTGfZMuRjC3WR5n8PumAIj1" : {
+      "codifyacademy" : true
+    },
+    "wCMOywu5vDaeoxQPHNT6x2vHYJY2" : {
+      "codifyacademy" : true,
+      "fairy" : true
+    },
+    "wh1NlfSFC2gdlJaJ6DAgMIPvgE32" : {
+      "ladderio" : true
     }
   }
 }
