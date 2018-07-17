@@ -168,6 +168,7 @@ angular.module('dashApp')
 
 
     // =============== SEARCH CHAT ARRAY TO DISPLAY IN CONVERSATIONS VIEW
+    // TODO: REFACTOR ERRYTHING JEEZ SO SLOW
 
     // function to sanitize input from search field
 
