@@ -26,7 +26,7 @@ app.config(['$routeProvider',
 	  	    }).
     	    when('/home', {
     	      templateUrl: 'src/views/home.html',
-    	      controller: 'MainCtrl',
+    	      controller: 'HomeCtrl',
             requireAuth: true
     	    }).
     	    when('/conversations/all', {

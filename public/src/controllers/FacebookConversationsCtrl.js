@@ -26,7 +26,7 @@ angular.module('dashApp')
 		 $scope.showExcellent = false;
 
 		// set default date range
-		$scope.selectedDate = { id: 1}
+		$scope.selectedDate = { id: 7}
 
 		// ======== THIS IS THE SAME FOR ALL CONTROLLERS (do not change)
 

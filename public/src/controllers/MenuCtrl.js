@@ -1,13 +1,68 @@
 angular.module('dashApp')
-    .controller('MenuCtrl', function ($rootScope, $scope, $mdSidenav, menuService) {
+    .controller('MenuCtrl', [
+       '$rootScope',
+       '$scope',
+       'chatsRef',
+       '$mdSidenav',
+       'menuService',
+      function ($rootScope, $scope, chatsRef, $mdSidenav, menuService) {
 
       console.log('MenuCtrl');
 
       // display app TODO: add a delay for a smoother transition
       document.getElementById('user-signed-in').className = 'active';
 
+      //who's dashboard?
       $scope.botName = window.sessionStorage.getItem('botName')
-      console.log($scope.botName)
+      console.log('loading data for: '+$scope.botName)
+
+      // default state of data download from database
+      $rootScope.dataLoaded = false
+
+      // initialize variable to store all chats
+      $rootScope.chatArray = []
+
+      // store all texts chats
+      $rootScope.textArray = []
+
+      // store all web chats
+      $rootScope.webArray = []
+
+      // store all facebook chats
+      $rootScope.facebookArray = []
+
+      chatsRef().on('child_added', function(snapshot) {
+        if(!$rootScope.dataLoaded){
+          return
+        }
+        else if ($rootScope.dataLoaded) {
+           // do something here
+          $rootScope.$broadcast('chats-updated');
+          console.log('updating chats child_added')
+         }
+       });
+
+      chatsRef().on('child_changed', function(snapshot) {
+        if(!$rootScope.dataLoaded){
+          return
+        }
+        else if ($rootScope.dataLoaded) {
+           // do something here
+          $rootScope.$broadcast('chats-updated');
+          console.log('updating chats child_changed')
+         }
+       });
+
+      chatsRef().on('child_removed', function(snapshot) {
+        if(!$rootScope.dataLoaded){
+          return
+        }
+        else if ($rootScope.dataLoaded) {
+           // do something here
+          $rootScope.$broadcast('chats-updated');
+          console.log('updating chats child_removed')
+         }
+       });
 
       //==== LOGOUT
 
@@ -53,4 +108,47 @@ angular.module('dashApp')
 
       });
 
-});
+      // ============== SET DATES IN CONVERSATIONS VIEW
+
+    // function to define date range objects
+    $rootScope.setDates = function(){
+      var now = new Date()
+      var nowyear = now.getFullYear()
+      var nowday = now.getDate()
+      var nowmonth = (now.getMonth())
+      var nowweekday = (now.getDay()-1)
+
+      var nowUnix = now.getTime()
+
+      var today = new Date(nowyear, nowmonth, nowday)
+      var todayUnix = today.getTime()
+
+      var yesterday = new Date(nowyear, nowmonth, nowday -1)
+      var yesterdayUnix = yesterday.getTime()
+
+      var thisweek = new Date(nowyear, nowmonth, nowday - nowweekday)
+      var thisweekUnix = thisweek.getTime()
+
+      var thismonth = new Date(nowyear, nowmonth)
+      var thismonthUnix = thismonth.getTime()
+
+      var pastweek = new Date(nowyear, nowmonth, (thisweek.getDate()-7))
+      var pastweekUnix = pastweek.getTime()
+
+      var pastmonth = new Date(nowyear, (nowmonth -1))
+      var pastmonthUnix = pastmonth.getTime()
+
+      // create array with date range objects
+        $rootScope.dates = [
+                          { id: 1, name: 'Today', start: todayUnix, end: nowUnix },
+                          { id: 2, name: 'Yesterday', start: yesterdayUnix, end: todayUnix },
+                          { id: 3, name: 'This Week', start: thisweekUnix, end: nowUnix},
+                          { id: 4, name: 'Past Week', start: pastweekUnix, end: thisweekUnix},
+                          { id: 5, name: 'This Month', start: thismonthUnix, end: nowUnix},
+                          { id: 6, name: 'Past Month', start: pastmonthUnix, end: thismonthUnix },
+                          { id: 7, name: 'Very Beginning', start:0, end: nowUnix }
+                        ];
+
+    } // end setDates()
+
+}]); // controller end

@@ -13,9 +13,20 @@ angular.module('dashApp')
    '$mdDialog',
    '$location',
    '$timeout',
-   function($rootScope, $scope, chatsRef, replyRef, $firebaseObject, $firebaseArray, $mdSidenav, menuService, $mdDialog, $location, $timeout){
+   function(
+     $rootScope,
+     $scope,
+     chatsRef,
+     replyRef,
+     $firebaseObject,
+     $firebaseArray,
+     $mdSidenav,
+     menuService,
+     $mdDialog,
+     $location,
+     $timeout)
+     {
        console.log("loading MainCtrl");
-
 
       if($rootScope.currentUser = null){
         console.log($rootScope.currentUser)
@@ -25,316 +36,141 @@ angular.module('dashApp')
       document.getElementById('loading').className = 'stage active';
 
 	   	// ===== RETRIEVE DATA FROM DATABASE
+
 	   	// create sync object using the reference we get using chatRef factory
 		 var obj = $firebaseArray(chatsRef())
 
-		 // default state of data download from database
-		 var initialDataLoaded = false
-
-		 // variable to store child from database
-		 var chat
-
-		 // initialize variable to store all chats
-		 $rootScope.chatArray = []
-
-	   // store all texts chats
-	   $rootScope.textArray = []
-
-	   // store all web chats
-	   $rootScope.webArray = []
-
-     // store all facebook chate
-     $rootScope.facebookArray = []
-
-		 chatsRef().on('child_added', function(snapshot) {
-			 if(!initialDataLoaded){
-				 return
-			 }
-			 else if (initialDataLoaded) {
-			    // do something here
-				 $rootScope.$broadcast('chats-updated');
-			  }
-			});
-
-		 chatsRef().on('child_changed', function(snapshot) {
-			 if(!initialDataLoaded){
-				 return
-			 }
-			 else if (initialDataLoaded) {
-			    // do something here
-				 $rootScope.$broadcast('chats-updated');
-			  }
-			});
-
-		 chatsRef().on('child_removed', function(snapshot) {
-			 if(!initialDataLoaded){
-				 return
-			 }
-			 else if (initialDataLoaded) {
-			    // do something here
-				 $rootScope.$broadcast('chats-updated');
-			  }
-			});
+     // loading status
+		 var initialDataLoaded = $rootScope.dataLoaded
+     console.log('data loaded: '+initialDataLoaded)
 
 		 // this will fire once when data is initially loaded
-		 chatsRef().once('value', function(snapshot) {
-			  // set initial download state to true
-			  initialDataLoaded = true;
-        console.log("initial data load complete")
-        $rootScope.$broadcast('data:loaded');
-        // hide loading screen
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('loading').className = 'stage not-active';
-        // show main view
-        document.getElementById('loaded').className = 'active';
+     if(initialDataLoaded === false){
 
-			  // create new empty array
-			  $rootScope.chatArray = [];
+       // get all the data
+        $rootScope.chatArray = obj.$loaded().then(function(data){
 
-        var split
-        var count = 0
+            $rootScope.chatArray = data
 
-			  $rootScope.chatArray = obj.$loaded().then(function(data){
+            // now set initial download state to true
+            $rootScope.dataLoaded = true;
+             console.log("initial data load complete")
 
-				  $rootScope.chatArray = data
+            // let others now about it
+            $rootScope.$broadcast('data:loaded');
 
-			      	// iterate thru data
-			     	angular.forEach(data, function(value, key) {
+            // create web, text and facebook conversation lists
+            $rootScope.webArray = data.filter((v,k) => v.info.type === 'web')
+            $rootScope.textArray = data.filter((v,k) => v.info.type === 'text')
+            $rootScope.facebookArray = data.filter((v,k) => v.info.type === 'facebook')
 
-              if(value.info != undefined){
+            // hide loading screen & show main view
+            // TODO: add done event so animation lasts through sorting of chat
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('loading').className = 'stage not-active';
+            document.getElementById('loaded').className = 'active';
 
-                if(value.info.createdAt != undefined){
+          }) // end obj.$loaded().then(function(data)
 
-    			     		if(value.info.type != undefined){
+      } // end if $rootScope.dataLoaded
 
-    			     			// if item is text
-    				     		if(value.info.type === "text"){
+      // ============= LOGIN ERROR
 
-    					     		// add chat obj to beginning of chatArray
-    					     		$rootScope.textArray.push(value)
-    				     		} else if (value.info.type === "web"){
-                      // if item is web
-                        // add chat obj to beginning of chatArray
-                        $rootScope.webArray.push(value)
-                    } else if(value.info.type === "facebook"){
-                      // if item is facebook
-                        // add chat obj to beginning of chatArray
-                        $rootScope.facebookArray.push(value)
-                    } // end if(value.info.type != undefined)
-    			     		} else {
-                    console.log("type undefined: "+value.$id)
-                    // obj.$remove(key)
-                  }
-                } else {
-                  console.log("no createdAt for: "+value.$id)
-                  // obj.$remove(key)
+        // show alerts when error occurs during login
+        $rootScope.showAlert = function(errorMessage) {
+         // Appending dialog to document.body to cover sidenav in docs app
+         // Modal dialogs should fully cover application
+         // to prevent interaction outside of dialog
+           $mdDialog.show(
+             $mdDialog.alert({
+               preserveScope: true,
+               skipHide: true,
+             })
+               .parent(angular.element(document.querySelector('#popupContainer')))
+               .clickOutsideToClose(true)
+               .title('Ooops!')
+               .textContent(errorMessage)
+               .ariaLabel('Alert Dialog Demo')
+               .ok('Got it!')
+           );
+         }; // end $rootScope.showAlert
 
-                }// end if(value.info.createdAt != undefined)
+         $rootScope.runScript = function(e, cb) {
+             if (e.which == 13 || e.keyCode == 13) {
+                 cb()
+                 return false;
+             }
+         };// end $rootScope.runScript
 
-                // delete all chats with test classifier
-                // if(value.info.classifierArray){
-                //   var str = value.info.classifierArray.toString()
-                //
-                //   if(str.indexOf('cedricTest') !== -1){
-                //     console.log("test classifier: "+value.$id)
-                //     obj.$remove(key)
-                //   }
-                //
-                //   if(str.indexOf('bobbotTest') !== -1){
-                //     console.log("test classifier: "+value.$id)
-                //     obj.$remove(key)
-                //   }
-                //
-                //
-                //   Object.entries(value.info.classifierArray).forEach(([prop, val]) => {
-                //     if(val === 'bobbotTest' || val === 'cedricTest' ){
-                //         console.log("test classifier: "+value.$id)
-                //         obj.$remove(key)
-                //       }
-                //     }
-                //   );
-                //
-                // }
+        // ============== LOADING CSS
 
-                // delete all convo from RU + DE
-                // if(value.info.customerCountry){
-                //   if(value.info.customerCountry === "RU"){
-                //     console.log("RU: "+value.$id)
-                //     obj.$remove(key)
-                //   }
-                //
-                //   if(value.info.customerCountry === "DE"){
-                //     console.log("DE: "+value.$id)
-                //     obj.$remove(key)
-                //   }
-                // }
+        if(initialDataLoaded === false){
+             console.log("loading screen")
+             // show loading screen
+             document.getElementById('loading').className = 'stage active';
+             // hide main view
+             document.getElementById('loaded').className = 'not-active';
+           } else {
+             document.getElementById('loaded').className = 'active';
+             document.getElementById('loading').className = 'not-active';
+         };// end if(initialDataLoaded === false)
 
-                // delete all conversation with kristina, matts, sams phone number
-                // if(value.info.customerNumber){
-                //   if(value.info.customerNumber === "4158197002"){
-                //     console.log("KT text: "+value.$id)
-                //     obj.$remove(key)
-                //   }
-                //
-                //   if(value.info.customerNumber === "9258763287"){
-                //     console.log("Matt text: "+value.$id)
-                //     obj.$remove(key)
-                //   }
-                //
-                //   if(value.info.customerNumber === "4155301557"){
-                //     console.log("Sam text: "+value.$id)
-                //     obj.$remove(key)
-                //   }
-                //   if(value.info.customerNumber === "4155278862"){
-                //     console.log("Sam text: "+value.$id)
-                //     obj.$remove(key)
-                //   }
-                //
-                // }
+         // ============== MODIFY DATA AND SAVE TO DATABASE
+
+         // function to indicate whether a conversations has been used for training (ideally all flags are true)
+         $rootScope.setTrainedFlag = function(id){
+
+           console.log('setting trained flag...')
+
+           var obj = $firebaseArray(chatsRef()).$loaded().then(function(data){
+             // find index for associated record in sync array from firebase
+             var i = data.$indexFor(id)
+
+             // if record exists
+             if (i !== -1){
+               // set status to either true/false
+               data[i].info.trained = !data[i].info.trained
+
+               // update item and save back to database
+               data.$save(i).then(function(){
+                 console.log("training flag has been set to: "+ data[i].info.trained)
+               })
+             } else {
+               console.log("could not find record in array to update training status")
+             }
+           })
+
+         } // .- end setTrainedFlag
+
+         // function to indicate whether a conversation was excellent (100% correct)
+         $rootScope.setExcellentFlag = function(id){
+
+           console.log('setting excellent flag...')
+
+           // if id is true
+           if(id){
+
+             // create reference to chat info
+             var info  = chatApp.database().ref(id).child('info')
+
+             // get current excellent status
+             var excellent = $rootScope.selectedObj.info.excellent
+
+             // update excellent to either true or false
+             info.update({
+               excellent: !excellent
+             })
+
+             console.log("set excellent to: "+ !excellent)
+           }
+
+         } // .- end setExcellentFlag
 
 
-              } else {
-                // check for db entries without info
-                console.log("no info for: " + value.$id)
-                // obj.$remove(key)
-              }// end if(value.info != undefined)
-			     	}) // end angular.forEach(data, function(value, key)
-			  }) // end obj.$loaded().then(function(data)
-		  }); // end chatsRef().once('value', function(snapshot)
+    // =============== SEARCH CHAT ARRAY TO DISPLAY IN CONVERSATIONS VIEW
 
-      // ===== LOGIN
+    // function to sanitize input from search field
 
-      // show alerts when error occurs during login
-      $rootScope.showAlert = function(errorMessage) {
-      // Appending dialog to document.body to cover sidenav in docs app
-      // Modal dialogs should fully cover application
-      // to prevent interaction outside of dialog
-        $mdDialog.show(
-          $mdDialog.alert({
-            preserveScope: true,
-            skipHide: true,
-          })
-            .parent(angular.element(document.querySelector('#popupContainer')))
-            .clickOutsideToClose(true)
-            .title('Ooops!')
-            .textContent(errorMessage)
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
-        );
-      };
-
-      $rootScope.runScript = function(e, cb) {
-          if (e.which == 13 || e.keyCode == 13) {
-              cb()
-              return false;
-          }
-      }
-
-      // ============== LOADING CSS
-      if(initialDataLoaded === false){
-          console.log("not loaded")
-          // show loading screen
-          document.getElementById('loading').className = 'stage active';
-          // hide main view
-          document.getElementById('loaded').className = 'not-active';
-        } else {
-          document.getElementById('loaded').className = 'active';
-          document.getElementById('loading').className = 'not-active';
-      }
-
-      // ============== MODIFY DATA AND SAVE TO DATABASE
-
-      // function to indicate whether a conversations has been used for training (ideally all flags are true)
-      $rootScope.setTrainedFlag = function(id){
-
-        var obj = $firebaseArray(chatsRef()).$loaded().then(function(data){
-          // find index for associated record in sync array from firebase
-          var i = data.$indexFor(id)
-
-          // if record exists
-          if (i !== -1){
-            // set status to either true/false
-            data[i].info.trained = !data[i].info.trained
-
-            // update item and save back to database
-            data.$save(i).then(function(){
-              console.log("training flag has been set to: "+ data[i].info.trained)
-            })
-          } else {
-            console.log("could not find record in array to update training status")
-          }
-        })
-
-      } // .- end setTrainedFlag
-
-      // function to indicate whether a conversation was excellent (100% correct)
-      $rootScope.setExcellentFlag = function(id){
-
-        // if id is true
-        if(id){
-
-          // create reference to chat info
-          var info  = chatApp.database().ref(id).child('info')
-
-          // get current excellent status
-          var excellent = $rootScope.selectedObj.info.excellent
-
-          // update excellent to either true or false
-          info.update({
-            excellent: !excellent
-          })
-
-          console.log("set excellent to: "+ !excellent)
-        }
-
-      } // .- end setExcellentFlag
-
-      // ============== SET DATES IN CONVERSATIONS VIEW
-
-      // function to define date range objects
-      $rootScope.setDates = function(){
-        var now = new Date()
-        var nowyear = now.getFullYear()
-        var nowday = now.getDate()
-        var nowmonth = (now.getMonth())
-        var nowweekday = (now.getDay()-1)
-
-        var nowUnix = now.getTime()
-
-        var today = new Date(nowyear, nowmonth, nowday)
-        var todayUnix = today.getTime()
-
-        var yesterday = new Date(nowyear, nowmonth, nowday -1)
-        var yesterdayUnix = yesterday.getTime()
-
-        var thisweek = new Date(nowyear, nowmonth, nowday - nowweekday)
-        var thisweekUnix = thisweek.getTime()
-
-        var thismonth = new Date(nowyear, nowmonth)
-        var thismonthUnix = thismonth.getTime()
-
-        var pastweek = new Date(nowyear, nowmonth, (thisweek.getDate()-7))
-        var pastweekUnix = pastweek.getTime()
-
-        var pastmonth = new Date(nowyear, (nowmonth -1))
-        var pastmonthUnix = pastmonth.getTime()
-
-        // create array with date range objects
-          $rootScope.dates = [
-                            { id: 1, name: 'Today', start: todayUnix, end: nowUnix },
-                            { id: 2, name: 'Yesterday', start: yesterdayUnix, end: todayUnix },
-                            { id: 3, name: 'This Week', start: thisweekUnix, end: nowUnix},
-                            { id: 4, name: 'Past Week', start: pastweekUnix, end: thisweekUnix},
-                            { id: 5, name: 'This Month', start: thismonthUnix, end: nowUnix},
-                            { id: 6, name: 'Past Month', start: pastmonthUnix, end: thismonthUnix },
-                            { id: 7, name: 'Very Beginning', start:0, end: nowUnix }
-                          ];
-
-      } // end setDates()
-
-      // =============== SEARCH CHAT ARRAY TO DISPLAY IN CONVERSATIONS VIEW
-
-      // function to sanitize input from search field
      $rootScope.sanitizePhone = function(targetNum){
      // remove everything but digits(0-9) and then strip out anything before last 10 digits
      return targetNum.replace (/[^\d]/g, "").replace (/^.*(\d{23})$/, "$1");
@@ -546,7 +382,8 @@ angular.module('dashApp')
 
              };	// end for loop chatArray
 
-            // load items for scroll view
+            // ========== SCROLLING OF MESSAGES
+
             var DynamicItems = function() {
                  /**
                   * @type {!Object<?Array>} Data pages, keyed by page number (0-index).
