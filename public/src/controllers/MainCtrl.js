@@ -452,8 +452,10 @@ angular.module('dashApp')
 
                 // function to show content of selected item
                 $rootScope.showContent = function($index){
-                  // save index for re-focus after question has ben trained
+                  console.log('showing content at...'+$index)
+                  // save index for re-focus after question has been trained
                   $rootScope.chatIndex = $index
+          
 
                   // set view to selected object
                   $rootScope.selectedObj = resultsArray[$index];
