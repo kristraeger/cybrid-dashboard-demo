@@ -28,11 +28,6 @@ angular.module('dashApp')
      {
        console.log("loading MainCtrl");
 
-      if($rootScope.currentUser = null){
-        console.log($rootScope.currentUser)
-        document.location.href = '/';
-      }
-
       document.getElementById('loading').className = 'stage active';
 
 	   	// ===== RETRIEVE DATA FROM DATABASE
@@ -455,7 +450,7 @@ angular.module('dashApp')
                   console.log('showing content at...'+$index)
                   // save index for re-focus after question has been trained
                   $rootScope.chatIndex = $index
-          
+
 
                   // set view to selected object
                   $rootScope.selectedObj = resultsArray[$index];
@@ -600,5 +595,7 @@ angular.module('dashApp')
         var str_quotes = str_removequotes.replace(/"/g,'""');
         return str_quotes
       };
+
+
 
 }]); // controller end

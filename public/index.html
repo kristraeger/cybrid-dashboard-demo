@@ -75,12 +75,16 @@
     /**
      * Initialize Firebase
      */
-     var config_chat = JSON.parse(window.sessionStorage.config_chat)
-     var chatApp = firebase.initializeApp(config_chat, 'chat');
+     if(window.sessionStorage.currentUserID){
+       var config_chat = JSON.parse(window.sessionStorage.config_chat)
+       var chatApp = firebase.initializeApp(config_chat, 'chat');
 
-     var config_reply = JSON.parse(window.sessionStorage.config_reply)
-     var replyApp = firebase.initializeApp(config_reply, 'reply');
-
+       var config_reply = JSON.parse(window.sessionStorage.config_reply)
+       var replyApp = firebase.initializeApp(config_reply, 'reply');
+     } else {
+       window.stop();
+       window.location.href = '/login.html#'
+     }
     </script>
 
   </head>
@@ -103,7 +107,11 @@
 			<!-- ==== end NAVABAR ==== -->
 
 			<!-- start SHOW WHEN SIGNED IN -->
-			<div id="user-signed-in" class="active" layout="row" layout-align="start stretch" ng-controller="MainCtrl">
+			<div id="user-signed-in"
+      class="active"
+      layout="row"
+      layout-align="start stretch"
+      ng-controller="MainCtrl">
 
 					<!-- ====== start LOADING ====== -->
 					<div class="stage not-active" id="loading">

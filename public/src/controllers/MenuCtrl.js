@@ -5,9 +5,14 @@ angular.module('dashApp')
        'chatsRef',
        '$mdSidenav',
        'menuService',
-      function ($rootScope, $scope, chatsRef, $mdSidenav, menuService) {
+       '$location',
+      function ($rootScope, $scope, chatsRef, $mdSidenav, menuService, $location) {
 
       console.log('MenuCtrl');
+
+      if(!window.sessionStorage.currentUserID){
+        return $location.path('/login.html#')
+      }
 
       // display app TODO: add a delay for a smoother transition
       document.getElementById('user-signed-in').className = 'active';
@@ -149,6 +154,7 @@ angular.module('dashApp')
                           { id: 7, name: 'Very Beginning', start:0, end: nowUnix }
                         ];
 
-    } // end setDates()
+      } // end setDates()
+
 
 }]); // controller end
