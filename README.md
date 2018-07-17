@@ -1,10 +1,13 @@
 # Cybrid Dashboard - Demo
 
-At Cybrid Industries, we build Cybrids, A.I. Sales Assistants using IBM Watson Natural Language Classifier. In order to track all conversations between the client's Cybrid and human prospects we needed an admin dashboard. In the web app you can:
-filter conversations by geolocation
-train the Cybrid on NEW questions, add NEW responses
-train the Cybrid on new user input expressions to existing questions to increase confidence rate
-assess overall performance (mark as 'excellent')
+In 2017, I ran a b2b startup called Cybrid Industries.
+At Cybrid Industries, we built Cybrids - A.I. Sales Assistants using IBM Watson Natural Language Classifier.
+In order to track all conversations between the client's Cybrid and their human prospects, we needed an admin dashboard.
+In the Cybrid Dashboard you can:
+* filter conversations by geolocation
+* train the Cybrid on NEW questions, add NEW responses
+* train the Cybrid on new user input expressions to existing questions to increase confidence rate
+* assess overall performance (mark as 'excellent')
 
 ## Getting Started
 
