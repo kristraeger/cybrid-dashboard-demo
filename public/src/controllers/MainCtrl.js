@@ -116,6 +116,7 @@ angular.module('dashApp')
          };// end if(initialDataLoaded === false)
 
          // ============== MODIFY DATA AND SAVE TO DATABASE
+         //TODO: REFACTOR ALL THE THIIINGS
 
          // function to indicate whether a conversations has been used for training (ideally all flags are true)
          $rootScope.setTrainedFlag = function(id){
